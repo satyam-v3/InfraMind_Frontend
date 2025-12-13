@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.98 0.004 210);
+  --color-foreground: oklch(0.25 0.02 215);
+
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.25 0.02 215);
+
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.25 0.02 215);
+
+  --color-primary: oklch(0.55 0.2 200);
+  --color-primary-foreground: oklch(1 0 0);
+
+  --color-secondary: oklch(0.92 0.01 210);
+  --color-secondary-foreground: oklch(0.25 0.02 215);
+
+  --color-muted: oklch(0.95 0.01 210);
+  --color-muted-foreground: oklch(0.55 0.015 215);
+
+  --color-accent: oklch(0.65 0.15 175);
+  --color-accent-foreground: oklch(1 0 0);
+
+  --color-destructive: oklch(0.55 0.2 0);
+  --color-destructive-foreground: oklch(1 0 0);
+
+  --color-warning: oklch(0.65 0.18 35);
+  --color-warning-foreground: oklch(1 0 0);
+
+  --color-success: oklch(0.55 0.13 145);
+  --color-success-foreground: oklch(1 0 0);
+
+  --color-border: oklch(0.88 0.01 215);
+  --color-input: oklch(0.88 0.01 215);
+  --color-ring: oklch(0.55 0.2 200);
+
+  --color-sidebar-background: oklch(0.98 0 0);
+  --color-sidebar-foreground: oklch(0.35 0.01 240);
+  --color-sidebar-primary: oklch(0.2 0.01 240);
+  --color-sidebar-primary-foreground: oklch(0.98 0 0);
+  --color-sidebar-accent: oklch(0.96 0.005 240);
+  --color-sidebar-accent-foreground: oklch(0.2 0.01 240);
+  --color-sidebar-border: oklch(0.91 0.01 220);
+  --color-sidebar-ring: oklch(0.65 0.2 217);
+
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+}
+
+:root {
+  --gradient-primary: linear-gradient(135deg, oklch(0.55 0.2 200), oklch(0.65 0.15 175));
+  --gradient-card: linear-gradient(to bottom right, oklch(1 0 0), oklch(0.99 0.002 210));
+  --shadow-card: 0 2px 8px -2px oklch(0.25 0.02 215 / 0.08);
+  --shadow-hover: 0 8px 24px -8px oklch(0.25 0.02 215 / 0.12);
+}
+
+.dark {
+  --color-background: oklch(0.15 0.02 215);
+  --color-foreground: oklch(0.95 0.01 210);
+
+  --color-card: oklch(0.2 0.02 215);
+  --color-card-foreground: oklch(0.95 0.01 210);
+
+  --color-popover: oklch(0.2 0.02 215);
+  --color-popover-foreground: oklch(0.95 0.01 210);
+
+  --color-primary: oklch(0.65 0.2 200);
+  --color-primary-foreground: oklch(1 0 0);
+
+  --color-secondary: oklch(0.25 0.02 215);
+  --color-secondary-foreground: oklch(0.95 0.01 210);
+
+  --color-muted: oklch(0.22 0.02 215);
+  --color-muted-foreground: oklch(0.7 0.015 215);
+
+  --color-accent: oklch(0.65 0.15 175);
+  --color-accent-foreground: oklch(1 0 0);
+
+  --color-destructive: oklch(0.55 0.2 0);
+  --color-destructive-foreground: oklch(1 0 0);
+
+  --color-warning: oklch(0.65 0.18 35);
+  --color-warning-foreground: oklch(1 0 0);
+
+  --color-success: oklch(0.55 0.13 145);
+  --color-success-foreground: oklch(1 0 0);
+
+  --color-border: oklch(0.28 0.02 215);
+  --color-input: oklch(0.28 0.02 215);
+  --color-ring: oklch(0.65 0.2 200);
+
+  --color-sidebar-background: oklch(0.2 0.01 240);
+  --color-sidebar-foreground: oklch(0.96 0.005 240);
+  --color-sidebar-primary: oklch(0.55 0.2 224);
+  --color-sidebar-primary-foreground: oklch(1 0 0);
+  --color-sidebar-accent: oklch(0.22 0.01 240);
+  --color-sidebar-accent-foreground: oklch(0.96 0.005 240);
+  --color-sidebar-border: oklch(0.22 0.01 240);
+  --color-sidebar-ring: oklch(0.65 0.2 217);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.2 200), oklch(0.65 0.15 175));
+  --gradient-card: linear-gradient(to bottom right, oklch(0.2 0.02 215), oklch(0.17 0.02 215));
+  --shadow-card: 0 2px 8px -2px oklch(0 0 0 / 0.3);
+  --shadow-hover: 0 8px 24px -8px oklch(0 0 0 / 0.4);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
