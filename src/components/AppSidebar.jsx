@@ -32,7 +32,7 @@ import { useAuthStore } from "@/features/auth/auth.store";
 const navigationItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Rooms", url: "/rooms", icon: Building2 },
-  { title: "Alerts & Predictions", url: "/alerts", icon: AlertTriangle },
+  { title: "Alerts", url: "/alerts", icon: AlertTriangle },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
 ];
 

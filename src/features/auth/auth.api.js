@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL
 
 export const loginRequest = async (data) => {
   try {
@@ -12,4 +12,9 @@ export const loginRequest = async (data) => {
   } catch (err) {
     throw new Error(err.response?.data?.message || "Login failed");
   }
+};
+
+export const fetchUsersRequest = async () => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/users`);
+  return res.data;
 };

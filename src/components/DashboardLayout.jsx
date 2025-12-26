@@ -1,13 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { useAlertsSocket } from "@/features/alerts/alerts.socket";
-import { useSensorsSocket } from "@/features/sensors/sensors.socket";
-import { useRoomsSocket } from "@/features/rooms/rooms.socket";
 
 export function DashboardLayout({ children }) {
-  useRoomsSocket();
-  useSensorsSocket();
-  useAlertsSocket();
   
   return (
     <SidebarProvider>

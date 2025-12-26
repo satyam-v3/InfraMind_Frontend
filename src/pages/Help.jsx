@@ -1,9 +1,17 @@
-import { HelpCircle, BookOpen, MessageCircle, Mail, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import {
+  HelpCircle,
+  BookOpen,
+  MessageCircle,
+  Mail,
+  ExternalLink,
+} from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 import {
   Accordion,
   AccordionContent,
@@ -12,118 +20,143 @@ import {
 } from "@/components/ui/accordion";
 
 export default function Help() {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Support request submitted successfully");
+      e.target.reset();
+    }, 800);
+  };
+
   return (
     <div className="space-y-6">
       {/* PAGE HEADER */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Help & Support</h1>
-        <p className="text-muted-foreground">Find answers and get assistance</p>
+        <p className="text-muted-foreground">
+          Find answers and get assistance
+        </p>
       </div>
 
-      {/* HELP OPTIONS */}
+      {/* QUICK HELP OPTIONS */}
       <div className="grid gap-6 md:grid-cols-3">
-
-        {/* DOCUMENTATION CARD */}
-        <Card className="hover:shadow-lg transition-shadow">
+        <Card>
           <CardHeader>
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
-              <BookOpen className="h-6 w-6 text-primary" />
-            </div>
+            <BookOpen className="h-6 w-6 text-primary mb-2" />
             <CardTitle>Documentation</CardTitle>
-            <CardDescription>Comprehensive guides and tutorials</CardDescription>
+            <CardDescription>
+              Guides, setup steps and system usage
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button variant="outline" className="w-full gap-2">
-              View Docs
-              <ExternalLink className="h-4 w-4" />
+            <Button
+              variant="outline"
+              className="w-full gap-2"
+              onClick={() => window.open("https://github.com", "_blank")}
+            >
+              View Docs <ExternalLink className="h-4 w-4" />
             </Button>
           </CardContent>
         </Card>
 
-        {/* LIVE CHAT */}
-        <Card className="hover:shadow-lg transition-shadow">
+        <Card>
           <CardHeader>
-            <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-2">
-              <MessageCircle className="h-6 w-6 text-accent" />
-            </div>
+            <MessageCircle className="h-6 w-6 text-accent mb-2" />
             <CardTitle>Live Chat</CardTitle>
-            <CardDescription>Chat with our support team</CardDescription>
+            <CardDescription>
+              Chat with the system administrator
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button variant="outline" className="w-full gap-2">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() =>
+                toast.info("Live chat will be enabled in next phase")
+              }
+            >
               Start Chat
-              <MessageCircle className="h-4 w-4" />
             </Button>
           </CardContent>
         </Card>
 
-        {/* EMAIL SUPPORT */}
-        <Card className="hover:shadow-lg transition-shadow">
+        <Card>
           <CardHeader>
-            <div className="h-12 w-12 rounded-lg bg-success/10 flex items-center justify-center mb-2">
-              <Mail className="h-6 w-6 text-success" />
-            </div>
+            <Mail className="h-6 w-6 text-success mb-2" />
             <CardTitle>Email Support</CardTitle>
-            <CardDescription>Get help via email within 24h</CardDescription>
+            <CardDescription>
+              Get help via email within 24 hours
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button variant="outline" className="w-full gap-2">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() =>
+                window.open("mailto:support@inframind.ai")
+              }
+            >
               Send Email
-              <Mail className="h-4 w-4" />
             </Button>
           </CardContent>
         </Card>
-
       </div>
 
-      {/* FAQ SECTION */}
+      {/* FAQ */}
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
             <HelpCircle className="h-5 w-5 text-primary" />
             <CardTitle>Frequently Asked Questions</CardTitle>
           </div>
-          <CardDescription>Quick answers to common questions</CardDescription>
         </CardHeader>
 
         <CardContent>
-          <Accordion type="single" collapsible className="w-full">
-
-            <AccordionItem value="item-1">
-              <AccordionTrigger>How do I add a new room to the system?</AccordionTrigger>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="1">
+              <AccordionTrigger>
+                How does sensor data reach the dashboard?
+              </AccordionTrigger>
               <AccordionContent>
-                Navigate to the Rooms page and click the "Add Room" button. Fill in the required details like room name, building, floor, and capacity.
+                Sensor data flows from ESP32 → MQTT → Backend → WebSockets → UI
+                in real-time.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-2">
-              <AccordionTrigger>How do I configure alert thresholds?</AccordionTrigger>
+            <AccordionItem value="2">
+              <AccordionTrigger>
+                What happens if a sensor goes offline?
+              </AccordionTrigger>
               <AccordionContent>
-                Go to Settings → Sensors tab. You can set the minimum and maximum values for temperature, humidity, and occupancy there.
+                The system raises an alert automatically after inactivity
+                thresholds are crossed.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3">
-              <AccordionTrigger>Can I export analytics data?</AccordionTrigger>
+            <AccordionItem value="3">
+              <AccordionTrigger>
+                Can I control devices remotely?
+              </AccordionTrigger>
               <AccordionContent>
-                Yes! Visit the Analytics page and click "Export Report". You can download CSV or Excel formats.
+                Yes. Lights and fans can be toggled from the Rooms page using
+                MQTT commands.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-4">
-              <AccordionTrigger>How do I manage user permissions?</AccordionTrigger>
+            <AccordionItem value="4">
+              <AccordionTrigger>
+                Is the data stored historically?
+              </AccordionTrigger>
               <AccordionContent>
-                Use the User Management page to control user roles like Admin, Manager, Operator, and Viewer.
+                Yes. Sensor readings are stored in MongoDB and can be used for
+                analytics.
               </AccordionContent>
             </AccordionItem>
-
-            <AccordionItem value="item-5">
-              <AccordionTrigger>What should I do if a sensor goes offline?</AccordionTrigger>
-              <AccordionContent>
-                Check the Sensor Management page, verify power & connectivity, and recalibrate or replace if needed.
-              </AccordionContent>
-            </AccordionItem>
-
           </Accordion>
         </CardContent>
       </Card>
@@ -132,40 +165,45 @@ export default function Help() {
       <Card>
         <CardHeader>
           <CardTitle>Contact Support</CardTitle>
-          <CardDescription>Send us a message and we'll respond soon</CardDescription>
+          <CardDescription>
+            Send a message to the InfraMind team
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <form className="space-y-4">
-
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Your name" />
+              <div>
+                <Label>Name</Label>
+                <Input required placeholder="Your name" />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="your.email@campus.edu" />
+              <div>
+                <Label>Email</Label>
+                <Input required type="email" placeholder="you@example.com" />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" placeholder="What do you need help with?" />
+            <div>
+              <Label>Subject</Label>
+              <Input required placeholder="Issue subject" />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" placeholder="Describe your problem..." rows={6} />
+            <div>
+              <Label>Message</Label>
+              <Textarea
+                required
+                rows={5}
+                placeholder="Describe the issue..."
+              />
             </div>
 
-            <Button className="w-full">Submit Request</Button>
-
+            <Button disabled={loading} className="w-full">
+              {loading ? "Sending..." : "Submit Request"}
+            </Button>
           </form>
         </CardContent>
       </Card>
-
     </div>
   );
 }
